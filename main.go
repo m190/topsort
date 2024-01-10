@@ -173,8 +173,8 @@ func findLargestInChunk(filePath string, startPos, endPos int64, resultSize int)
 	}
 	// read one more line to prevent loosing data due to inaccurate splitting
 	// candidates, _ = processLine(scanner, candidates, resultSize)
-
 	processLineWithHeap(scanner, heapCandidates)
+
 	candidates = heapCandidates.values
 	sort.Slice(candidates, func(i, j int) bool {
 		return candidates[i].Size > candidates[j].Size
@@ -202,7 +202,6 @@ func processLine(scanner *bufio.Scanner, candidates []Record, resultSize int) ([
 
 	line := scanner.Text()
 	newRecord := NewRecord(line)
-	// candidates.Insert(newRecord)
 	candidates = appendElement(candidates, newRecord, resultSize)
 
 	return candidates, int64(len(scanner.Bytes()) + 1)
@@ -228,10 +227,6 @@ func appendElement(arr []Record, r Record, resultSize int) []Record {
 			return append(arr, r)
 		}
 
-		// arr = append(arr, r)
-		// copy(arr[pos+1:], arr[pos:])
-		// arr[pos] = r
-		// return arr
 		return append(arr[:pos], append([]Record{r}, arr[pos+1:]...)...)
 	}
 
@@ -239,9 +234,6 @@ func appendElement(arr []Record, r Record, resultSize int) []Record {
 		return arr
 	}
 
-	// copy(arr[pos+1:], arr[pos:])
-	// arr[pos] = r
-	// return arr
 	return append(arr[:pos], append([]Record{r}, arr[pos+1:]...)...)[:resultSize]
 }
 

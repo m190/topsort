@@ -60,7 +60,7 @@ sys     0m6.140s
 
 A better solution is to read a file in parallel and merge the results. You can find the solution in `main.go`. It can be executed using:
 ```
-go run main.go <file-path>
+go run . <file-path>
 ```
 Replace <file-path> with the path to the file containing link records.
 
@@ -77,17 +77,17 @@ Some features:
 Results from running the program on the same input data:
 
 ```
-$ time go run main.go data.csv
+$ time go run . data.csv
 real    0m1.796s
 user    0m0.000s
 sys     0m0.218s
 
-$ time go run main.go data2.csv
+$ time go run . data2.csv
 real    0m2.663s
 user    0m0.015s
 sys     0m0.171s
 
-$ time go run main.go data3.csv
+$ time go run . data3.csv
 real    0m14.217s
 user    0m0.000s
 sys     0m0.155s
